@@ -1,6 +1,3 @@
-<head>
-  <title>United Chemicals Europe</title>
-</head>
 <br><br>
 <p align="center">
   <img src="united_chemicals_logo-2.jpg" />
