@@ -1,4 +1,3 @@
-
 <br><br>
 <p align="center">
   <img src="united_chemicals_logo-2.jpg" />
