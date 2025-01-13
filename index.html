@@ -2,8 +2,7 @@
 <html>
   <head>
     <title>United Chemicals Europe</title>
-    <script src="https://www.google.com/recaptcha/enterprise.js?render=6LeJr7UqAAAAAC9KVtR5EQp-h7NcrNRorJudiD-8"></script>
-    <link rel="icon" href="./favicon.ico" type="image/ico"/>
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script><link rel="icon" href="./favicon.ico" type="image/ico"/>
     <link rel="shortcut icon" href="./favicon.ico" type="image/x-icon"/>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -151,6 +150,11 @@
     </div>
 
     <!-- Contact Section -->
+    <!-- Cloudflare Turnstile -->
+    <div class="cf-turnstile"
+    data-sitekey="0x4AAAAAAA5MW4JH5LeGu9J7"
+    data-callback="javascriptCallback"></div>
+    
     <div class="w3-container w3-light-grey" style="padding:128px 16px" id="contact">
       <h3 class="w3-center">CONTACT</h3>
       <div style="margin-top:48px">
@@ -159,21 +163,17 @@
         <p><i class="fa fa-envelope fa-fw w3-xxlarge w3-margin-right"> </i> info@uce.lv</p>
         <br>
         <p class="w3-center w3-large">Send us a message:</p>
-        <form id="recaptcha">
-          <p><input class="w3-input w3-border" type="text" placeholder="Name" required name="Name"></p>
-          <p><input class="w3-input w3-border" type="email" placeholder="Email" required name="Email"></p>
-          <p><input class="w3-input w3-border" type="text" placeholder="Subject" required name="Subject"></p>
-          <p><input class="w3-input w3-border" type="text" placeholder="Message" required name="Message"></p>
-          <p>
-            <!--<button class="w3-button w3-black" -->
-            <button class="g-recaptcha"
-              data-sitekey="6LeJr7UqAAAAAC9KVtR5EQp-h7NcrNRorJudiD-8" 
-              data-callback='onSubmit'
-              data-action='submit'>
-  Submit
-</button>type="submit">
-              <i class="fa fa-paper-plane"></i> SEND MESSAGE
-        </form>
+        <form action="/action_page.php" target="_blank">
+      <p><input class="w3-input w3-border" type="text" placeholder="Name" required name="Name"></p>
+      <p><input class="w3-input w3-border" type="email" placeholder="Email" required name="Email"></p>
+      <p><input class="w3-input w3-border" type="text" placeholder="Subject" required name="Subject"></p>
+      <p><input class="w3-input w3-border" type="text" placeholder="Message" required name="Message"></p>
+      <p>
+        <button class="w3-button w3-black cf-turnstile" data-sitekey="0x4AAAAAAA5MW4JH5LeGu9J7" type="submit">
+          <i class="fa fa-paper-plane"></i> SEND MESSAGE
+        </button>
+      </p>
+    </form>
             </button>
           </p>
         </form>
@@ -194,10 +194,15 @@
     </footer>
  
     <script>
-    // Google reCaptcha
-    function onSubmit(token) {
-      document.getElementById("recaptcha").submit();
-    }
+    // Cloudflare Turnstile
+      window.onloadTurnstileCallback = function () {
+        turnstile.render(".cf-turnstile", {
+          sitekey: "0x4AAAAAAA5MW4JH5LeGu9J7",
+          callback: function (token) {
+            console.log(`Challenge Success ${token}`);
+          },
+        });
+      };
     // Modal Image Gallery
     function onClick(element) {
       document.getElementById("img01").src = element.src;
