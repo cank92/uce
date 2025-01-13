@@ -194,6 +194,10 @@
     </footer>
  
     <script>
+    // Google reCaptcha
+    function onSubmit(token) {
+      document.getElementById("recaptcha").submit();
+    }
     // Modal Image Gallery
     function onClick(element) {
       document.getElementById("img01").src = element.src;
