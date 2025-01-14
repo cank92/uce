@@ -200,6 +200,29 @@
           },
         });
       };
+
+    //Cloudflare Worker
+      document.getElementById("turnstile-form").addEventListener("submit", async () => {
+      const token = document.querySelector(".cf-turnstile").getAttribute("data-cf-turnstile-response");
+
+      const response = await fetch("https://shy-morning-d5ac.cankaleli.workers.dev/", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ "cf-turnstile-response": token }),
+      });
+        const response = await fetch("https://shy-morning-d5ac.cankaleli.workers.dev/", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ "cf-turnstile-response": token }),
+        });
+
+      const result = await response.json();
+      if (result.success) {
+        alert("Verification successful!");
+      } else {
+        alert("Verification failed!");
+      }
+    });
     // Modal Image Gallery
     function onClick(element) {
       document.getElementById("img01").src = element.src;
